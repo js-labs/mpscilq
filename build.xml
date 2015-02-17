@@ -1,0 +1,37 @@
+<project name="mpscilq">
+
+    <property name="VERSION" value="0.1"/>
+    <property name="OUT_DIR" location="out/production"/>
+
+    <target name="clean">
+        <delete dir="out"/>
+    </target>
+
+    <target name="test">
+        <mkdir dir="${OUT_DIR}"/>
+        <javac srcdir="src" destdir="${OUT_DIR}" includeantruntime="false" debug="true"/>
+        <java classname="org.jsl.jct.Main" fork="true">
+            <classpath>
+                <pathelement location="${OUT_DIR}"/>
+            </classpath>
+            <jvmarg value="-ea"/>
+        </java>
+    </target>
+
+    <target name="dtest">
+        <mkdir dir="${OUT_DIR}"/>
+        <javac srcdir="dtest" destdir="${OUT_DIR}" includeantruntime="false" debug="true">
+            <classpath>
+                <pathelement location="dtest/disruptor-3.3.0.jar"/>
+            </classpath>
+        </javac>
+        <java classname="org.jsl.dtest.Main" fork="true">
+            <classpath>
+                <pathelement location="${OUT_DIR}"/>
+                <pathelement location="dtest/disruptor-3.3.0.jar"/>
+            </classpath>
+            <jvmarg value="-ea"/>
+        </java>
+    </target>
+
+</project>
